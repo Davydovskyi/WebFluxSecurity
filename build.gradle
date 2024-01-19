@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id "org.springframework.boot" version "$springBootVersion"
+    id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
+    id "io.freefair.lombok" version "$lombokVersion"
+}
+
+group = 'edu.jcourse'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.session:spring-session-core'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+
+    implementation "io.r2dbc:r2dbc-postgresql:$r2dbcVersion"
+    implementation "org.postgresql:postgresql:$postgreSqlVersion"
+
+    implementation "org.flywaydb:flyway-core:$flywayDbVersion"
+    // to avoid error: Unsupported Database - https://github.com/flyway/flyway/issues/3780
+    implementation "org.flywaydb:flyway-database-postgresql:$flywayDbVersion"
+    // to avoid warnings
+    implementation "com.google.code.findbugs:jsr305:$googleFindBugsVersion"
+
+    implementation "org.mapstruct:mapstruct:$mapStructVersion"
+
+//    implementation "io.jsonwebtoken:jjwt:$jsonWebTokenVersion"
+    implementation "io.jsonwebtoken:jjwt-api:$jsonWebTokenVersion"
+    runtimeOnly "io.jsonwebtoken:jjwt-impl:$jsonWebTokenVersion"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson:$jsonWebTokenVersion"
+    // to avoid warnings
+    implementation "javax.xml.bind:jaxb-api:$jaxbApiVersion"
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+test {
+    useJUnitPlatform()
+}
